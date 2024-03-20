@@ -4,23 +4,22 @@ use enigo::{Enigo, MouseControllable, KeyboardControllable};
 fn move_mouse_for_crafting(base_x: i32, base_y: i32, enigo: &mut Enigo) {
     let final_product_x = 1015;  // Adjust according to your screen layout
     let final_product_y = 420;   // Adjust according to your screen layout
-    
+
+    enigo.key_down(enigo::Key::Shift);
     for j in 0..3 {
         let mouse_y = base_y + j * 45;
         for i in 0..10 {
             let mouse_x = base_x + i * 50;
-            thread::sleep(time::Duration::from_millis(60));
+            thread::sleep(time::Duration::from_millis(600));
             enigo.mouse_move_to(mouse_x as i32, mouse_y as i32);
-            enigo.key_down(enigo::Key::Shift);
             enigo.mouse_click(enigo::MouseButton::Left);
-            enigo.key_up(enigo::Key::Shift);
         }
-        thread::sleep(time::Duration::from_millis(120));
+        thread::sleep(time::Duration::from_millis(1200));
         enigo.mouse_move_to(final_product_x as i32, final_product_y as i32);
-        enigo.key_down(enigo::Key::Shift);
         enigo.mouse_click(enigo::MouseButton::Left);
-        enigo.key_up(enigo::Key::Shift);
     }
+    enigo.key_up(enigo::Key::Shift);
+
 }
 
 fn craft_item(enigo: &mut Enigo) {
